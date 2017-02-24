@@ -1,4 +1,8 @@
 <div class="container">
+  <form action="/out" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" value="Log Out" class="btn btn-default">
+  </form>
   <a href="/show/<%= @idea.user.id %>">Profile</a>
   <h1><%= @idea.user.alias.capitalize %> says:</h1>
   <h3 style="border:1px solid black"><%= @idea.content.capitalize %></h3>

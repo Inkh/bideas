@@ -1,4 +1,8 @@
 <div class="container">
+  <form action="/out" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" value="Log Out">
+  </form>
   <a href="/show/<%= @user.id %>">Back</a>
   <h3>Name: <%= @user.name.capitalize %></h3>
   <p>Alias: <%= @user.alias.capitalize %></p>
