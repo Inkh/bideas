@@ -1,0 +1,10 @@
+<div class="container">
+  <a href="/show/<%= @user.id %>">Back</a>
+  <h3>Name: <%= @user.name.capitalize %></h3>
+  <p>Alias: <%= @user.alias.capitalize %></p>
+  <p>Email: <%= @user.email %></p>
+  <p>--------------------------------------------</p>
+
+  <p>Total Number of Posts: <%= @user.ideas.count %></p>
+  <p>Total Number of Likes: <%= @user.liked_ideas.count %></p>
+</div>

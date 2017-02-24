@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Not a user yet? Register!</h1>
+  <p class="text-warning bg-warning"><%= flash[:errors] %></p>
+
+  <form action="/register" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="name">Username:</label>
+    <input type="text" name="alias"><br>
+    <label for="name">Name:</label>
+    <input type="text" name="name"><br>
+    <label for="email">Email:</label>
+    <input type="text" name="email"><br>
+    <label for="pw">Password:</label>
+    <input type="text" name="pw"><br>
+    <label for="pw_confirm">Confirm Password:</label>
+    <input type="text" name="pw_confirm"><br>
+    <input type="submit" value="Register" class="btn btn-default">
+  </form>
+
+  <h1>Already a user? Log in!</h1>
+  <p class="text-warning bg-warning"><%= flash[:log_error] %></p>
+  <form action="/log" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="email">Email:</label>
+    <input type="text" name="email"><br>
+    <label for="pw">Password:</label>
+    <input type="text" name="pw"><br>
+    <input type="submit" value="Log In" class="btn btn-default">
+  </form>
+</div>

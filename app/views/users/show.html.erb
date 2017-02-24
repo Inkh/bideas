@@ -1,0 +1,44 @@
+<!-- I AM SHOWING USERS FOR BIDEAS -->
+
+<div class="container">
+  <div class="row">
+    <h1>Welcome <%= @user.name.capitalize %>(<%= @user.alias.capitalize %>)!</h1>
+    <form action="/out" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Log Out" class="btn btn-default">
+    </form>
+    <br>
+    <div class="row center">
+      <p class="text-warning bg-warning"><%= flash[:errors] %></p>
+      <form class="form-inline center" action="/create_idea" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="text" name="idea" placeholder="Post an idea!" class="col-md-6">
+        <input type="submit" value="Post!" class="btn btn-default">
+      </form>
+    </div>
+  </div>
+
+  <% @list.each do |idea| %>
+    <div class="row" style="border: 1px solid black; margin:5px; padding:5px">
+      <p><a href="/view/<%= idea.user.id %>"><%= idea.user.alias.capitalize %></a> says: <%= idea.content.capitalize %></p>
+      <% if @user.liked_ideas.exists?(:id => idea.id) == true %>
+      <form class="form-inline" action="/unlike_idea/<%= idea.id%>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Unlike" class="btn btn-default">
+        <p><a href="/idea/show/<%= idea.id %>"><%= idea.liked_users.count %></a> people like this.</p>
+      </form>
+      <% else %>
+      <form class="form-inline" action="/like_idea/<%= idea.id %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Like" class="btn btn-default">
+        <p><a href="/idea/show/<%= idea.id %>"><%= idea.liked_users.count %></a> people like this.</p>
+      </form>
+      <% end %>
+      <% if @user == idea.user %>
+      <form class="form-inline" action="/destroy_idea/<%= idea.id %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Destroy" class="btn btn-default">
+      </form>
+      <% end %>
+    </div>
+  <% end %>
